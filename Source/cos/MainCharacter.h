@@ -44,4 +44,10 @@ private:
 	float DefaultCameraPitchRotation;
 
 	bool bIsCrouching = false;
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<class APlayerFlashlight> flashlightClass;
+	class APlayerFlashlight* flashlight;
+
+	UFUNCTION(BlueprintCallable)
+	void ToggleFlashlight();
 };

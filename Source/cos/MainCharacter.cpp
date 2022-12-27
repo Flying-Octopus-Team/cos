@@ -4,6 +4,7 @@
 
 #include "MovementData.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "PlayerFlashlight.h"
 
 AMainCharacter::AMainCharacter()
 {
@@ -26,6 +27,19 @@ void AMainCharacter::BeginPlay()
 	}
 	
 	CurrentVelocity = DefaultVelocity;
+
+
+	if (flashlightClass) 
+	{
+		FActorSpawnParameters spawnParams;
+		spawnParams.Owner = this;
+		flashlight = GetWorld()->SpawnActor<APlayerFlashlight>(flashlightClass, spawnParams);
+		if (flashlight)
+		{
+			flashlight->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("upperarm_l"));
+		}
+	}
+	
 }
 
 void AMainCharacter::SetupMovementSettingsFromDataAsset()
@@ -107,3 +121,10 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("Look Up / Down Mouse", this, &AMainCharacter::LookUpDown);
 }
 
+void AMainCharacter::ToggleFlashlight()
+{
+	if (flashlight) 
+	{
+		flashlight->ToogleFlashlight();
+	}
+}
