@@ -21,11 +21,12 @@ void APlayerFlashlight::BeginPlay()
 
 void APlayerFlashlight::ToogleFlashlight()
 {
-	bLightOn = !bLightOn;
 	if (spotLightComponent) 
 	{
-		spotLightComponent->SetHiddenInGame(!bLightOn);
+		bool bLight = spotLightComponent->bHiddenInGame;
+		spotLightComponent->SetHiddenInGame(!bLight);
+		
 		//play sound
-		UE_LOG(LogTemp, Warning, TEXT("Latara %s"), bLightOn ? TEXT("on") : TEXT("off"));
+		UE_LOG(LogTemp, Warning, TEXT("Flashlight turn %s"), bLight ? TEXT("on") : TEXT("off"));
 	}
 }

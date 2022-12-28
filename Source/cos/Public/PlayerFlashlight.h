@@ -29,7 +29,5 @@ private:
 	class UStaticMeshComponent* flashlightMesh;
 	UPROPERTY(EditDefaultsOnly)
 	class USpotLightComponent* spotLightComponent;
-	UPROPERTY(VisibleAnywhere)
-	bool bLightOn = true;
 	
 };

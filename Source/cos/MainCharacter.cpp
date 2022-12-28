@@ -28,7 +28,6 @@ void AMainCharacter::BeginPlay()
 	
 	CurrentVelocity = DefaultVelocity;
 
-
 	if (flashlightClass) 
 	{
 		FActorSpawnParameters spawnParams;
@@ -39,7 +38,6 @@ void AMainCharacter::BeginPlay()
 			flashlight->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("upperarm_l"));
 		}
 	}
-	
 }
 
 void AMainCharacter::SetupMovementSettingsFromDataAsset()
@@ -119,6 +117,8 @@ void AMainCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 	PlayerInputComponent->BindAxis("Turn Right / Left Mouse", this, &APawn::AddControllerYawInput);
 	PlayerInputComponent->BindAxis("Look Up / Down Mouse", this, &AMainCharacter::LookUpDown);
+
+	PlayerInputComponent->BindAction("Flashlight", IE_Pressed, this, &AMainCharacter::ToggleFlashlight);
 }
 
 void AMainCharacter::ToggleFlashlight()
